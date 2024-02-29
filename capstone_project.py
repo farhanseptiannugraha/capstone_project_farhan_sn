@@ -22,7 +22,7 @@ st.markdown("""
 #     3. Number 3
 # """)
 
-tab1, tab2 = st.tabs(["Essential Oil EXIM", "Patchouli and parfum"])
+tab1, tab2 = st.tabs(["Essential Oil EXIM", "Patchouli and Perfume"])
 with tab1:
     st.header("Essential Oil EXIM")
     # Image
@@ -258,7 +258,7 @@ with tab1:
 
 
 with tab2:
-    st.header("Patchouli and parfum")
+    st.header("Patchouli and Perfume")
 #Luas lahan dan produktivitas
     df3 = pd.read_csv('./dataset_capstone/luas_lahan_produktivitas.csv')
     import plotly.express as px
