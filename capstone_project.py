@@ -22,7 +22,7 @@ st.markdown("""
 #     3. Number 3
 # """)
 
-tab1, tab2 = st.tabs(["Essential Oil EXIM", "Patchouli and Parfume"])
+tab1, tab2 = st.tabs(["Essential Oil EXIM", "Patchouli and parfum"])
 with tab1:
     st.header("Essential Oil EXIM")
     # Image
@@ -43,7 +43,7 @@ with tab1:
     st.markdown("""Essential Oil (Minyak Atsiri) telah digunakan selama ribuan tahun untuk berbagai tujuan, khususnya pengobatan dan wewangian. 
                 Essential Oil merupakan cairan pekat yang mengandung senyawa aroma yang khas dari tumbuhan. Sebagai negara yang kaya akan jenis tumbuhan, 
                 Indonesia merupakan tempat alami bagi berkembangnya industri ini. Terdapat sekitar 40 jenis yang diproduksi Indonesia, 12 diantaranya dikembangkan secara komersial dalam skala industri. 
-                Minyak atsiri biasanya merupakan komoditas yang bernilai tinggi dan bervolume rendah. Ekspor minyak atsiri Indonesia melebihi US$ 124 juta pada 2010 dan industri parfume merupakan salah satu konsumen minyak atsiri terbesar. 
+                Minyak atsiri biasanya merupakan komoditas yang bernilai tinggi dan bervolume rendah. Ekspor minyak atsiri Indonesia melebihi US$ 124 juta pada 2010 dan industri parfum merupakan salah satu konsumen minyak atsiri terbesar. 
                 Namun di Indonesia sendiri perkembangan produksi, ekspor maupun pemanfaatannya cenderung rendah dibandingkan potensi yang dimiliki, lalu faktor dan kemungkinan apa yang bisa dilakukan untuk memperbaiki ini?""")
 
     df = pd.read_csv('./dataset_capstone/export_all.csv')
@@ -225,7 +225,7 @@ with tab1:
     st.altair_chart(chart, use_container_width=True)
     # Penjabaran tentang perkembangan
     st.markdown("""10 negara paling banyak meng impor Essential Oil dari Indonesia sebagian besar berasal dari Asia. Namun perkembangannya pun fluktuatif dan hanya beberapa negara
-                yang mengalami kenaikan yang stabil, salah satunya United Arab Emirates yang saat ini industri parfume nya sedang sangat ramai. Ini bisa menjadi salah satu peluang bagi Indonesia.""")
+                yang mengalami kenaikan yang stabil, salah satunya United Arab Emirates yang saat ini industri parfum nya sedang sangat ramai. Ini bisa menjadi salah satu peluang bagi Indonesia.""")
     
     with st.expander("Data yang digunakan"):
         st.markdown("**Data Ekspor Impor Badan Pusat Statistik (BPS) (HS 33) 2019 - 2023**: (https://www.bps.go.id/id/exim)")
@@ -258,7 +258,7 @@ with tab1:
 
 
 with tab2:
-    st.header("Patchouli and Parfume")
+    st.header("Patchouli and parfum")
 #Luas lahan dan produktivitas
     df3 = pd.read_csv('./dataset_capstone/luas_lahan_produktivitas.csv')
     import plotly.express as px
@@ -343,7 +343,7 @@ with tab2:
         st.altair_chart(harga_chart, use_container_width=True)
 
     st.markdown("""Salah satu jenis tanaman yang bisa menghasilkan Essential Oil adalah Patchouli (Nilam). Kualitas Patchouli dari Indonesia (khususnya Aceh) sudah sangat terkenal di seluruh dunia,
-                bahkan salah satu brand internasional __Dior__ melalui laman Instagram nya pernah menunjukkan bahwa salah satu parfume best seller mereka _Dior Sauvage_ menggunakan
+                bahkan salah satu brand internasional __Dior__ melalui laman Instagram nya pernah menunjukkan bahwa salah satu parfum best seller mereka _Dior Sauvage_ menggunakan
                 patchouli yang berasal dari Indonesia ([Link video](https://www.instagram.com/reel/CiKpDaljEdQ/?utm_source=ig_web_copy_link)). Berdasarkan persebaran areal tanam dan produksinya sendiri
                 __Provinsi Sumatera dan Sulawesi__ menjadi daerah dengan luas areal dan produksi terbesar di Indonesia. Menariknya berdasarkan data dari [Direktorat Jenderal Perkebunan Kementerian Pertanian Indonesia](https://ditjenbun.pertanian.go.id/?publikasi=buku-statistik-perkebunan-2021-2023) seluruh kegiatan perkembangan komoditas Patchouli (Nilam)
                 di Indonesia dilakukan lewat __Perkebunan Rakyat__ (tidak ada milik swasta maupun pemerintah) dengan total __78547 Ha__ per Desember 2023. Perkembangan luas areal, produksi dan produktivitas cenderung fluktuatif, hal tersebut salah satunya dikarenakan harga pasar yang jika dibandingkan dengan komoditi lain memang bisa dibilang cukup rendah.
@@ -529,7 +529,7 @@ with tab2:
         'brand_type': ['Local', 'International'],
         'average_price': [avg_price_local, avg_price_international]
     })
-    chart_parfume = alt.Chart(df_avg_prices).mark_bar().encode(
+    chart_parfum = alt.Chart(df_avg_prices).mark_bar().encode(
         x=alt.X('brand_type:N', title='Brand Type', axis=alt.Axis(labelAngle=0)), 
         y=alt.Y('average_price:Q', title='Average Price'),
         color=alt.Color('brand_type:N', legend=alt.Legend(title="Brand Type"))
@@ -553,13 +553,13 @@ with tab2:
     col1, spacer, col2 = st.columns([1, 0.1, 1])
 
     with col1:
-       st.altair_chart(chart_parfume, use_container_width=True)
+       st.altair_chart(chart_parfum, use_container_width=True)
 
     with spacer:
         st.write("")
 
     with col2:
         st.write("""Salah satu upaya yang dapat dilakukan adalah mendorong program hilirisasi industri. Di Indonesia sendiri pemanfaatan Essential Oil yang sedang 
-                 meningkat trend penjualannya adalah sebagai __Parfume__. Berdasarkan data penjualan e-commerce per 17 Februari 2024 __local brand__ menjadi pilihan utama para pembeli
+                 meningkat trend penjualannya adalah sebagai __parfum__. Berdasarkan data penjualan e-commerce per 17 Februari 2024 __local brand__ menjadi pilihan utama para pembeli
                  dibandingkan international brand. Keunggulan utama dari local brand sendiri adalah __harga yang jauh lebih murah__ dibandingkan dengan international brand. Bahkan beberapa
-                 local brand parfume dari Indonesia sudah mulai melebarkan sayap di pasar internasional. Ini bisa menjadi peluang yang sangat baik jika didukung dengan pengembangan kualitas yang semakin baik.""")
+                 local brand parfum dari Indonesia sudah mulai melebarkan sayap di pasar internasional. Ini bisa menjadi peluang yang sangat baik jika didukung dengan pengembangan kualitas yang semakin baik.""")
