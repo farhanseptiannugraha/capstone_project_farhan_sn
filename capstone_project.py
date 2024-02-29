@@ -46,7 +46,7 @@ with tab1:
                 Minyak atsiri biasanya merupakan komoditas yang bernilai tinggi dan bervolume rendah. Ekspor minyak atsiri Indonesia melebihi US$ 124 juta pada 2010 dan industri parfume merupakan salah satu konsumen minyak atsiri terbesar. 
                 Namun di Indonesia sendiri perkembangan produksi, ekspor maupun pemanfaatannya cenderung rendah dibandingkan potensi yang dimiliki, lalu faktor dan kemungkinan apa yang bisa dilakukan untuk memperbaiki ini?""")
 
-    df = pd.read_csv('C:/Users/UsEr/capstone_project/export_all.csv')
+    df = pd.read_csv('./capstone_project_farhan_sn/export_all.csv')
     # Membuat barchart
     st.header('Negara Pengekspor Essential Oil')
 
