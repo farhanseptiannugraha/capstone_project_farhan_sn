@@ -119,7 +119,7 @@ with tab1:
     st.markdown("<hr>", unsafe_allow_html=True)
     st.header('Perkembangan Ekspor Impor Essential Oil di Indonesia')
     # Data Exim Indonesia
-    df2 = pd.read_csv('C:/Users/UsEr/capstone_project/exim_val_net.csv')
+    df2 = pd.read_csv('./capstone_project_farhan_sn/exim_val_net.csv')
 
     CURR_YEAR = max(df2['tahun'])
     PREV_YEAR = CURR_YEAR - 1
@@ -260,8 +260,7 @@ with tab1:
 with tab2:
     st.header("Patchouli and Parfume")
 #Luas lahan dan produktivitas
-    df3 = pd.read_csv('C:/Users/UsEr/capstone_project/luas_lahan_produktivitas.csv')
-
+    df3 = pd.read_csv('./capstone_project_farhan_sn/luas_lahan_produktivitas.csv')
     import plotly.express as px
 
     col1, col2= st.columns(2)  # Membuat dua kolom
@@ -312,7 +311,7 @@ with tab2:
         )
     )
 
-    df4 = pd.read_csv('C:/Users/UsEr/capstone_project/harga_minyak_nilam.csv')
+    df4 = pd.read_csv('./capstone_project_farhan_sn/harga_minyak_nilam.csv')
 
     # Membuat bar chart
     bar_harga = alt.Chart(df4).mark_bar(opacity=0.7, color='green').encode(
@@ -479,7 +478,7 @@ with tab2:
         st.dataframe(df3)
 
     col1, col2 = st.columns(2)
-    df5 = pd.read_csv('C:/Users/UsEr/capstone_project/penjualan_ecommerce.csv')
+    df5 = pd.read_csv('./capstone_project_farhan_sn/penjualan_ecommerce.csv')
     # Menghitung total penjualan untuk local dan internasional
     # Menghitung total penjualan untuk local dan internasional
     df_sales = df5.groupby('brand')['sold'].sum().reset_index()
