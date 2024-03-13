@@ -14,13 +14,6 @@ st.markdown("""
         <h1>Analisa Potensi Essential Oil Indonesia</h1>
     </div>
     """, unsafe_allow_html=True)
-# st.markdown("_italic_")
-# st.markdown("__bold__")
-# st.markdown("""
-#     1. Number 1
-#     2. Number 2
-#     3. Number 3
-# """)
 
 tab1, tab2 = st.tabs(["Essential Oil EXIM", "Patchouli and Perfume"])
 with tab1:
@@ -47,10 +40,8 @@ with tab1:
                 Namun di Indonesia sendiri perkembangan produksi, ekspor maupun pemanfaatannya cenderung rendah dibandingkan potensi yang dimiliki, lalu faktor dan kemungkinan apa yang bisa dilakukan untuk memperbaiki ini?""")
 
     df = pd.read_csv('./dataset_capstone/export_all.csv')
-    # Membuat barchart
     st.header('Negara Pengekspor Essential Oil')
 
-    # Menampilkan chart di Streamlit
     col1, col2 = st.columns(2)  
 
     # Mengurutkan data berdasarkan 'value_exported_2022_usd' secara descending
@@ -116,6 +107,7 @@ with tab1:
     with st.expander("Lihat Data Tubular"):
         
          st.dataframe(df)
+
     st.markdown("<hr>", unsafe_allow_html=True)
     st.header('Perkembangan Ekspor Impor Essential Oil di Indonesia')
     # Data Exim Indonesia
@@ -186,6 +178,74 @@ with tab1:
         prev_net_imp = data_exim.loc[data_exim['tahun']==PREV_YEAR, 'netweight_import_kg'].values[0] if PREV_YEAR in data_exim['tahun'].values else 0
         imp_net_diff_pct = 100.0 * (curr_net_imp - prev_net_imp) / prev_net_imp if prev_net_imp != 0 else 0
         st.metric("Netweight Import", value=format_big_number(curr_net_imp), delta=f'{imp_net_diff_pct:.2f}%')
+
+    col1, col2 = st.columns(2) 
+    
+    # Buat chart dengan Altair tentang perkembangan EXIM Essential Oil
+    with st.expander("Grafik Perkembangan Value Ekspor Impor Essential Oil"):
+        options = st.multiselect(
+            'Pilih Value:',
+            ['Value Export (USD)', 'Value Import (USD)'],
+            format_func=lambda x: 'Value Export (USD)' if x == 'Value Export (USD)' else 'Value Import (USD)' if x == 'Value Import (USD)' else x,
+            default=['Value Export (USD)', 'Value Import (USD)']  # Default values to display
+        )
+
+        # Menentukan warna
+        colors = ['blue', 'green']
+
+        # Line Chart
+        charts = []
+        for i, option in enumerate(options):
+            y_column = 'value_export_usd' if option == 'Value Export (USD)' else 'value_import_usd'
+            
+            chart = alt.Chart(data_exim).mark_line(color=colors[i]).encode(
+                x=alt.X('tahun:O', axis=alt.Axis(labelAngle=0)),  # Rotate x-axis labels
+                y=alt.Y(y_column, title='Value(USD)')
+            ).properties(
+                width=400,
+                height=300,
+                title='Perkembangan Ekspor Impor Essential Oil (2019-2023)'
+            )
+            
+            # Add points to the line chart
+            points = chart.mark_circle(color=colors[i]).encode(
+                opacity=alt.value(1)
+            )
+            
+            charts.append(chart + points)
+        st.altair_chart(alt.layer(*charts), use_container_width=True)
+
+        options2 = st.multiselect(
+            'Pilih Value:',
+            ['Netweight Export (Kg)', 'Netweight Import (Kg)'],
+            format_func=lambda x: 'Netweight Export (Kg)' if x == 'Netweight Export (Kg)' else 'Netweight Import (Kg)' if x == 'Netweight Import (Kg)' else x,
+            default=['Netweight Export (Kg)', 'Netweight Import (Kg)']
+        )
+
+        # Menentukan warna
+        colors2 = ['blue', 'green']
+
+        # Line Chart Netweight
+        charts_netweight = []
+        for i, option in enumerate(options2):
+            y_column = 'netweight_export_kg' if option == 'Netweight Export (Kg)' else 'netweight_import_kg'
+            
+            chart_net = alt.Chart(data_exim).mark_line(color=colors[i]).encode(
+                x=alt.X('tahun:O', axis=alt.Axis(labelAngle=0)),  # Rotate x-axis labels
+                y=alt.Y(y_column, title='Netweight(Kg)')
+            ).properties(
+                width=400,
+                height=300,
+                title='Perkembangan Netweight Ekspor Impor Essential Oil (2019-2023)'
+            )
+            
+            # Add points to the line chart
+            points2 = chart_net.mark_circle(color=colors2[i]).encode(
+                opacity=alt.value(1)
+            )
+            
+            charts_netweight.append(chart_net + points2)
+        st.altair_chart(alt.layer(*charts_netweight), use_container_width=True)
 
     st.markdown("""Berdasarkan data ekspor impor dari Badan Pusat Statistik sendiri pergerakan value ekspor Essential Oil (HS 33) sempat mengalami penurunan pada tahun 2022, namun pada tahun yang
                 sama netweight ekspor mengalami kenaikan, itu berarti harga pada tahun itu memang cukup rendah yang membuat value ekspor nya justru turun. Pada tahun 2023 sendiri baik value maupun netweight
@@ -316,15 +376,15 @@ with tab2:
     # Membuat bar chart
     bar_harga = alt.Chart(df4).mark_bar(opacity=0.7, color='green').encode(
         x=alt.X('Tahun:N', axis=alt.Axis(title='', labelAngle=0)), 
-        y=alt.Y('Average:Q', axis=alt.Axis(title='Harga')),
+        y=alt.Y('Average:Q', axis=alt.Axis(title='Harga Rata-rata Parchouli (Rp/Kg)')),
     )
     # Membuat line chart 
     chart_harga = alt.Chart(df4).mark_line(point=True).encode(
         x=alt.X('Tahun:O', title='Tahun'),  
-        y=alt.Y('Average:Q', title='Harga Rata-Rata Minyak Nilam (Rp/Kg)'),
+        y=alt.Y('Average:Q'),
         tooltip=['Tahun', 'Average']
     ).properties(
-        title='Harga Rata-Rata Minyak Nilam per Tahun',
+        title='Harga Rata-Rata Patchouli (Minyak Nilam) per Tahun',
         width=400,
         height=400
     )
@@ -479,7 +539,7 @@ with tab2:
 
     col1, col2 = st.columns(2)
     df5 = pd.read_csv('./dataset_capstone/penjualan_ecommerce.csv')
-    # Menghitung total penjualan untuk local dan internasional
+
     # Menghitung total penjualan untuk local dan internasional
     df_sales = df5.groupby('brand')['sold'].sum().reset_index()
 
